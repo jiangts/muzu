@@ -35,7 +35,7 @@
       "32": "images/muzu32.png"
     },
     "default_title": "Muzu Chatbot",
-    "default_popup": "dist/index.html"
+    "default_popup": "dist/sidebar.html"
   },
   "author": "",
   "homepage_url": "https://github.com/jiangts/muzu",
