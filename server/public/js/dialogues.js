@@ -48,23 +48,53 @@ const dialogues = [
       },
       {
         speaker: 'bot',
-        variable: 'interaction',
+        variable: 'NEXT',
         buttons: [
           {
             text: `I got stuck :(`,
-            value: 'stuck',
-            type: 'input'
+            value: 'stuck'
           },
           {
             text: `This is fun!`,
-            value: 'fun'
+            value: 'intro2'
           }
         ]
       }
     ]
   },
   {
-    type: 'intro',
+    type: 'stuck',
+    dialogue: [
+      {
+        speaker: 'bot',
+        content: `Hi {{=name}}, let's get unstuck together!`
+      },
+      {
+        speaker: 'bot',
+        content: `Can you explain your problem to me in words?`
+      },
+      {
+        speaker: 'human',
+        input: {
+          variable: 'bug_description',
+          placeholder: 'Describe your bug'
+        }
+      },
+      {
+        speaker: 'bot',
+        content: `Let's go to the debugging toolbox!`,
+        NEXT: 'toolbox'
+      }
+    ]
+  },
+  {
+    type: 'toolbox',
+    dialogue: [
+
+    ]
+  },
+  {
+    type: 'intro2',
     dialogue: [
       {
         speaker: 'bot',

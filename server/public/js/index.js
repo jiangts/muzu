@@ -33,6 +33,33 @@ var load_tmpl = (function() {
   }
 })()
 
+(function(jQuery) {
+
+  jQuery.eventEmitter = {
+    _JQInit: function() {
+      this._JQ = jQuery(this);
+    },
+    emit: function(evt, data) {
+      !this._JQ && this._JQInit();
+      this._JQ.trigger(evt, data);
+    },
+    once: function(evt, handler) {
+      !this._JQ && this._JQInit();
+      this._JQ.one(evt, handler);
+    },
+    on: function(evt, handler) {
+      !this._JQ && this._JQInit();
+      this._JQ.bind(evt, handler);
+    },
+    off: function(evt, handler) {
+      !this._JQ && this._JQInit();
+      this._JQ.unbind(evt, handler);
+    }
+  };
+
+}(jQuery));
+
+
 $(document).ready(function() {
 
   $('.menu .item').tab();
@@ -128,6 +155,14 @@ $(document).ready(function() {
   ]
 
 
+  $.eventEmitter.on('chatbot', function(ev, data) {
+    console.log('data', data);
+    if (data.NEXT === 'toolbox') {
+      setTimeout(function() {
+        $('[data-tab="toolbox"]').click();
+      }, 2000)
+    }
+  });
 
   Promise.all([
     get_tmpl('tmpls/toolbox.html'),
@@ -234,5 +269,5 @@ $(document).ready(function() {
     render_bug(reasons);
   })
 
-  run_dialogue(botui, dialogues);
+  run_dialogue(botui, dialogues, 'intro');
 });

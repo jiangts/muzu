@@ -3,9 +3,13 @@ const compute_delay = string => {
 }
 
 const do_dialogue = (botui, dialogue, context) => {
+  // store botui promise instances
   let next_botui;
-  if(dialogue.input) {
-    let input = dialogue.input;
+
+  // handle dialogue input
+  let { input, buttons } = dialogue;
+
+  if (input) {
     next_botui = botui.action.text({
       action: {
         placeholder: input.placeholder
@@ -13,8 +17,8 @@ const do_dialogue = (botui, dialogue, context) => {
     }).then(res => {
       context[input.variable] = res.value;
     })
-  } else if (dialogue.buttons) {
-    let buttons = dialogue.buttons;
+  }
+  else if (buttons) {
     next_botui = botui.action.button({
       action: buttons
     }).then(res => {
@@ -27,10 +31,11 @@ const do_dialogue = (botui, dialogue, context) => {
     }).then(res => {
       context[dialogue.variable] = res.value;
     })
-  } else {
-    var template = new t(dialogue.content);
-    var content = template.render(context); // dialogue.content
-    var delay = compute_delay(dialogue.content);
+  }
+  else {
+    let template = new t(dialogue.content);
+    let content = template.render(context);
+    let delay = compute_delay(content);
 
     next_botui = botui.message.add({
       [dialogue.speaker]: true,
@@ -45,14 +50,32 @@ const do_dialogue = (botui, dialogue, context) => {
       }, delay);
     }));
   }
+  if (dialogue.NEXT) {
+    context.NEXT = dialogue.NEXT;
+  }
   return next_botui.then(() => botui);
 }
 
-const run_dialogue = (botui, dialogues, context={}) => {
-  let conversation = dialogues[0].dialogue;
+const run_dialogue = (botui, dialogues, name, context={}) => {
+  let conversation = dialogues.find(d => d.type === name).dialogue;
   let inst = Promise.resolve(botui);
+  // basically compiling the network...
+  // could also access the network in realtime...
+  // then it can dynamicaally change when the underlying map changes...
   for(let i = 0; i < conversation.length; i++) {
-    inst = inst.then(botui => do_dialogue(botui, conversation[i], context))
+    inst = inst.then(botui => {
+      return do_dialogue(botui, conversation[i], context)
+    }).then(botui => {
+      $.eventEmitter.emit('chatbot', context);
+      let { NEXT } = context;
+      if (NEXT) {
+        delete context.NEXT;
+        return run_dialogue(botui, dialogues, NEXT, context);
+      }
+      return botui;
+    })
   }
+
+  return botui;
 }
 
