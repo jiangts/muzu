@@ -12,14 +12,14 @@
 
 <div class="ui link cards">
   {{@reasons}}
-  <div class="card muzu-reason" data-reason="{{=_key}}" style="width: 100%">
+  <div class="{{=_val.color}} card muzu-reason" data-reason="{{=_key}}" style="width: 100%">
     <div class="content">
       <!-- <div class="header">Matt Giampietro</div> -->
       <div class="meta">
-        Possible reason {{=_key}}
+        Possible reason {{=_val.nu}}
       </div>
       <div class="description">
-        {{=_val}}
+        {{=_val.text}}
       </div>
     </div>
     <!--
@@ -35,6 +35,22 @@
     -->
   </div>
   {{/@reasons}}
+
+
+</div>
+
+<div class="ui cards">
+  <div class="card" style="width: 100%">
+    <div class="content">
+      <div class="meta">
+        Add a reason:
+      </div>
+      <div class="ui action input">
+        <input type="text" placeholder="">
+        <button class="ui button" id="add-reason">Add hypothesis</button>
+      </div>
+    </div>
+  </div>
 </div>
 {{/page0}}
 
@@ -43,23 +59,29 @@
 
 
 {{page1}}
-<div class="ui card" data-reason="{{=_key}}" style="width: 100%">
+<div class="ui card" style="width: 100%">
   <div class="content">
     <!-- <div class="header">Matt Giampietro</div> -->
     <div class="meta">
-      Possible reason {{=index}}
+      Possible reason {{=reason_index}}
     </div>
     <div class="description">
-      {{=bug}}
+      {{=reason.text}}
     </div>
   </div>
-  <div class="ui buttons">
+  <div class="ui buttons" id="triage-reason">
     <button class="ui button green">
       <i class="check icon"></i>
     </button>
     <button class="ui button red">
-      <i class="times icon"></i>
+      <i class="close icon"></i>
     </button>
+  </div>
+</div>
+
+
+<div class="ui card" style="width: 100%">
+  <div class="content" id="muzu-toolkit">
   </div>
 </div>
 {{/page1}}

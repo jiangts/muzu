@@ -44,6 +44,41 @@ const dialogues = [
       },
       {
         speaker: 'bot',
+        content: `Nice to meet you {{=name}}! I'm here to help you if you get stuck.`
+      },
+      {
+        speaker: 'bot',
+        variable: 'interaction',
+        buttons: [
+          {
+            text: `I got stuck :(`,
+            value: 'stuck',
+            type: 'input'
+          },
+          {
+            text: `This is fun!`,
+            value: 'fun'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    type: 'intro',
+    dialogue: [
+      {
+        speaker: 'bot',
+        content: `Hi! My name is Muzu, and I am here to support you as you program amazing things! What is your name?`
+      },
+      {
+        speaker: 'human',
+        input: {
+          variable: 'name',
+          placeholder: 'Your name'
+        }
+      },
+      {
+        speaker: 'bot',
         content: `Nice to meet you {{=name}}! What are you hoping to create in Scratch today?`
       },
       {

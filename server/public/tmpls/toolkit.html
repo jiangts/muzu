@@ -1,0 +1,38 @@
+{{page2}}
+<div class="ui basic blue button back">
+  <i class="chevron left icon"></i>
+  back
+</div>
+<center><h3> {{=tool.title}} </h3></center>
+
+<div class="ui secondary menu">
+  {{@tool.tabs}}
+  <a class="item" data-tab="{{=_val.title}}" style="flex: 1;">
+    <span style="margin: auto;">{{=_val.title}}</span>
+  </a>
+  {{/@tool.tabs}}
+</div>
+
+{{@tool.tabs}}
+<div class="ui tab" data-tab="{{=_val.title}}">
+  {{=_val.markdown}}
+</div>
+{{/@tool.tabs}}
+</div>
+
+{{:page2}}
+<div class="meta" style="padding-bottom: 14px;">
+  Toolkit:
+</div>
+<div class="ui grid">
+  {{@toolkit}}
+  <div class="eight wide column">
+    <center>
+      <button class="ui button muzu-tool" data-tool="{{=_key}}" style="width: 130px; height: 100px">
+        {{=_val.title}}
+      </button>
+    </center>
+  </div>
+  {{/@toolkit}}
+</div>
+{{/page2}}
