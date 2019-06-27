@@ -1,0 +1,34 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "7fafbf235b5b798c162aced68ac0d4edb9ace534cad7cd9f87e0037a5545a1bdf414fde4d7edccbad22c5aeb3878d369be6a7a7d327987cc4a715ee3d5cb0b86422c296640abad8851c81d48a057abdf3e8bc4ed7161cbb3773bd93424d1c097eb07119e4db4708d7cfea1d9e2bdc1e22ee2b067a229b8e595cac79edb39f9c9b833328b9ffdb6684c6265527c606914156d851a0a904b4d2dacf70d21c0d1946fb0c352ecc8233fdf3b69afd9d8105e26354302a2afdca12145ff1ced35ea0108066bd06d1f947fe6b62d7650c41fcc4ec565b25529416ca44a4b4a9dbbff3ec8bc2a29e1589aa16b081b234a589f262b92087e76bd3977982bda8b68dac921",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/muzu"
+}
