@@ -25,7 +25,7 @@
         "js/jquery-2.2.4.min.js",
         "js/dialogues.js",
         "js/t.js",
-        "content_script.js"
+        "js/chatbot.js"
       ]
     }
   ],
