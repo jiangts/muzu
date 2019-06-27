@@ -1,15 +1,65 @@
+{{page0}}
 <div class="ui piled segment">
-  <div class="ui feed">
-    <div class="event">
-      <div class="label">
-        <i class="bug icon"></i>
-      </div>
-      <div class="content">
-        <h3>Current Bug</h3>
-        <p>{{=value}}</p>
-      </div>
-    </div>
+  <div class="content">
+    <h3>
+      <i class="bug icon"></i>
+      Current Bug
+    </h3>
+    <p>{{=bug}}</p>
   </div>
-
 </div>
 
+
+<div class="ui link cards">
+  {{@reasons}}
+  <div class="card muzu-reason" data-reason="{{=_key}}" style="width: 100%">
+    <div class="content">
+      <!-- <div class="header">Matt Giampietro</div> -->
+      <div class="meta">
+        Possible reason {{=_key}}
+      </div>
+      <div class="description">
+        {{=_val}}
+      </div>
+    </div>
+    <!--
+    <div class="extra content">
+      <span class="right floated">
+        Joined in 2013
+      </span>
+      <span>
+        <i class="user icon"></i>
+        75 Friends
+      </span>
+    </div>
+    -->
+  </div>
+  {{/@reasons}}
+</div>
+{{/page0}}
+
+
+
+
+
+{{page1}}
+<div class="ui card" data-reason="{{=_key}}" style="width: 100%">
+  <div class="content">
+    <!-- <div class="header">Matt Giampietro</div> -->
+    <div class="meta">
+      Possible reason {{=index}}
+    </div>
+    <div class="description">
+      {{=bug}}
+    </div>
+  </div>
+  <div class="ui buttons">
+    <button class="ui button green">
+      <i class="check icon"></i>
+    </button>
+    <button class="ui button red">
+      <i class="times icon"></i>
+    </button>
+  </div>
+</div>
+{{/page1}}
