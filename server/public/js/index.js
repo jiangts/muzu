@@ -138,7 +138,8 @@ $(document).ready(function() {
       toolkit_tmpl
     ] = tmpls;
 
-    var reasons = [
+    var reasons = [];
+    [
       {
         text: 'The character is moving, but it\'s so small you cannot see it',
       },
@@ -175,11 +176,13 @@ $(document).ready(function() {
       });
 
       $('#add-reason').click(function(el) {
-        var new_reason = $(this).prev().val()
-        reasons.push({
-          text: new_reason
-        })
-        render_bug(reasons);
+        var new_reason = $(this).prev().val().trim()
+        if (new_reason.length) {
+          reasons.push({
+            text: new_reason
+          })
+          render_bug(reasons);
+        }
       });
     }
 
