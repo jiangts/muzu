@@ -1,0 +1,7 @@
+#muzu-chatbot {
+  z-index: 1000;
+  position: fixed;
+  border: red 1px solid;
+  bottom: 5px;
+  right: 5px;
+}

@@ -1,0 +1,47 @@
+{
+  "manifest_version": 2,
+  "name": "Muzu",
+  "version": "0.0.1",
+  "description": "Learning computational thinking practices",
+  "icons": {
+    "16": "images/muzu16.png",
+    "48": "images/muzu48.png",
+    "128": "images/muzu128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://scratch.mit.edu/*",
+        "https://scratch.mit.edu/*"
+      ],
+      "css": [
+        "css/botui-theme-default.css",
+        "css/botui.min.css",
+        "css/muzu.css"
+      ],
+      "js": [
+        "js/vue.min.js",
+        "js/botui.min.js",
+        "js/jquery-2.2.4.min.js",
+        "js/dialogues.js",
+        "js/t.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "20": "images/muzu20.png",
+      "32": "images/muzu32.png"
+    },
+    "default_title": "Muzu",
+    "default_popup": "index.html"
+  },
+  "author": "",
+  "homepage_url": "https://github.com/jiangts/muzu",
+  "minimum_chrome_version": "46",
+  "permissions": [
+    "tabs"
+  ],
+  "short_name": "Muzu"
+}
