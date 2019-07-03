@@ -81,88 +81,8 @@ $(document).ready(function() {
   // });
 
   var md = markdownit();
-  var result = md.render('Make your project talk to you! Add extra "say" blocks in-between the blocks you\'re testing, to see if all of your blocks are being run in your project, or to check a particular variable.');
-
-  var toolkit = [
-    {
-      title: 'A block at a time',
-      tabs: [
-        {
-          title: 'description',
-          markdown: result
-        },
-        {
-          title: 'tutorial',
-          markdown: result
-        },
-        {
-          title: 'workspace',
-          markdown: result
-        }
-      ]
-    },
-    {
-      title: 'Project talk',
-      tabs: [
-        {
-          title: 'description',
-          markdown: result
-        },
-        {
-          title: 'tutorial',
-          markdown: result
-        },
-        {
-          title: 'workspace',
-          markdown: result
-        }
-      ]
-    },
-    {
-      title: 'Search Online',
-      tabs: [
-        {
-          title: 'description',
-          markdown: result
-        },
-        {
-          title: 'tutorial',
-          markdown: result
-        },
-        {
-          title: 'workspace',
-          markdown: result
-        }
-      ]
-    },
-    {
-      title: 'Take a break',
-      tabs: [
-        {
-          title: 'description',
-          markdown: result
-        },
-        {
-          title: 'tutorial',
-          markdown: result
-        },
-        {
-          title: 'workspace',
-          markdown: result
-        }
-      ]
-    }
-  ]
-
-
-  $.eventEmitter.on('chatbot', function(ev, data) {
-    console.log('data', data);
-    if (data.NEXT === 'toolbox') {
-      setTimeout(function() {
-        $('[data-tab="toolbox"]').click();
-      }, 2000)
-    }
-  });
+  // md.render()
+  var chat_context = {};
 
   Promise.all([
     get_tmpl('tmpls/toolbox.html'),
@@ -173,16 +93,8 @@ $(document).ready(function() {
       toolkit_tmpl
     ] = tmpls;
 
+    var bug = '';
     var reasons = [];
-    [
-      {
-        text: 'The character is moving, but it\'s so small you cannot see it',
-      },
-      {
-        text: 'The code isn\'t going to my if block'
-      }
-    ]
-
 
     var render_bug;
     var render_reason;
@@ -190,7 +102,7 @@ $(document).ready(function() {
     render_bug = function(reasons) {
       $('#toolbox-container').html(toolbox_tmpl.render({
         page0: true,
-        bug: `My character isn't moving when I press the arrow key`,
+        bug: bug,
         reasons: reasons.map((r, i) => {
           r.nu = i + 1;
           if (r.culprit === true) {
@@ -238,6 +150,12 @@ $(document).ready(function() {
       $('#triage-reason .check').parent().click(function() {
         reasons[reason_index].culprit = true;
         render_bug(reasons)
+        setTimeout(function() {
+          $('[data-tab="muzu"]').click();
+          run_dialogue(botui, dialogues, 'solution', Object.assign(chat_context, {
+            reason: reasons[reason_index].text
+          }));
+        }, 2000)
       })
 
 
@@ -267,7 +185,19 @@ $(document).ready(function() {
     }
 
     render_bug(reasons);
+
+    $.eventEmitter.on('chatbot', function(ev, data) {
+      console.log('data', data);
+      if (data.NEXT === 'toolbox') {
+        bug = data.bug_description;
+        render_bug(reasons);
+        setTimeout(function() {
+          $('[data-tab="toolbox"]').click();
+        }, 2000)
+      }
+    });
   })
 
-  run_dialogue(botui, dialogues, 'intro');
+  run_dialogue(botui, dialogues, 'intro', chat_context);
+
 });

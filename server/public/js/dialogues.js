@@ -27,6 +27,82 @@ const transitions = [
   }
 ]
 
+let result = '<p>Make your project talk to you! Add extra "say" blocks in-between the blocks you\'re testing, to see if all of your blocks are being run in your project, or to check a particular variable.</p>';
+
+
+
+const toolkit = [
+  {
+    title: 'A block at a time',
+    tabs: [
+      {
+        title: 'description',
+        markdown: result
+      },
+      {
+        title: 'tutorial',
+        markdown: result
+      },
+      {
+        title: 'workspace',
+        markdown: result
+      }
+    ]
+  },
+  {
+    title: 'Project talk',
+    tabs: [
+      {
+        title: 'description',
+        markdown: result
+      },
+      {
+        title: 'tutorial',
+        markdown: result
+      },
+      {
+        title: 'workspace',
+        markdown: result
+      }
+    ]
+  },
+  {
+    title: 'Search Online',
+    tabs: [
+      {
+        title: 'description',
+        markdown: result
+      },
+      {
+        title: 'tutorial',
+        markdown: result
+      },
+      {
+        title: 'workspace',
+        markdown: result
+      }
+    ]
+  },
+  {
+    title: 'Take a break',
+    tabs: [
+      {
+        title: 'description',
+        markdown: result
+      },
+      {
+        title: 'tutorial',
+        markdown: result
+      },
+      {
+        title: 'workspace',
+        markdown: result
+      }
+    ]
+  }
+]
+
+
 const dialogues = [
   {
     type: 'intro',
@@ -44,8 +120,14 @@ const dialogues = [
       },
       {
         speaker: 'bot',
-        content: `Nice to meet you {{=name}}! I'm here to help you if you get stuck.`
-      },
+        content: `Nice to meet you {{=name}}! I'm here to help you if you get stuck.`,
+        NEXT: 'main_loop'
+      }
+    ]
+  },
+  {
+    type: 'main_loop',
+    dialogue: [
       {
         speaker: 'bot',
         variable: 'NEXT',
@@ -84,6 +166,31 @@ const dialogues = [
         speaker: 'bot',
         content: `Let's go to the debugging toolbox!`,
         NEXT: 'toolbox'
+      }
+    ]
+  },
+  {
+    type: 'solution',
+    dialogue: [
+      {
+        speaker: 'bot',
+        content: `Great work debugging, {{=name}}! It looks like the problem was that, "{{=reason}}".`
+      },
+      {
+        speaker: 'bot',
+        content: `Now can you use words to state what a solution might be?`
+      },
+      {
+        speaker: 'human',
+        input: {
+          variable: 'soln_description',
+          placeholder: 'Describe a solution'
+        },
+      },
+      {
+        speaker: 'bot',
+        content: 'Great work debugging, {{=name}}!',
+        NEXT: 'main_loop'
       }
     ]
   },
