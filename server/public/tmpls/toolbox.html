@@ -1,87 +1,92 @@
 {{page0}}
 <div class="ui piled segment">
   <div class="content">
-    <h3>
-      <i class="bug icon"></i>
-      Current Bug
-    </h3>
+    <h3><i class="bug icon"></i> Current Bug</h3>
     <p>{{=bug}}</p>
   </div>
 </div>
 
-
 <div class="ui link cards">
   {{@reasons}}
-  <div class="{{=_val.color}} card muzu-reason" data-reason="{{=_key}}" style="width: 100%">
+  <div
+    class="{{=_val.color}} card muzu-reason"
+    data-reason="{{=_key}}"
+    style="width: 100%"
+  >
     <div class="content">
       <!-- <div class="header">Matt Giampietro</div> -->
-      <div class="meta">
-        Possible reason {{=_val.nu}}
-      </div>
-      <div class="description">
-        {{=_val.text}}
-      </div>
+      <div class="meta">Possible reason {{=_val.nu}}</div>
+      <div class="description">{{=_val.text}}</div>
     </div>
     <!--
-    <div class="extra content">
-      <span class="right floated">
-        Joined in 2013
-      </span>
-      <span>
-        <i class="user icon"></i>
-        75 Friends
-      </span>
-    </div>
+      <div class="extra content">
+        <span class="right floated">
+          Joined in 2013
+        </span>
+        <span>
+          <i class="user icon"></i>
+          75 Friends
+        </span>
+      </div>
     -->
   </div>
   {{/@reasons}}
+</div>
 
-
+<div class="ui grid">
+  {{@toolkit}}
+  <div class="eight wide column">
+    <center>
+      <button
+        class="ui button muzu-tool"
+        data-tool="{{=_key}}"
+        style="width: 130px; height: 100px"
+      >
+        {{=_val.title}}
+      </button>
+    </center>
+  </div>
+  {{/@toolkit}}
 </div>
 
 <div class="ui cards">
   <div class="card" style="width: 100%">
     <div class="content">
-      <div class="meta">
-        Add a reason:
-      </div>
+      <div class="meta">Add a reason:</div>
       <div class="ui action input">
-        <input type="text" placeholder="">
+        <input type="text" placeholder="" />
         <button class="ui button" id="add-reason">Add hypothesis</button>
       </div>
     </div>
   </div>
 </div>
-{{/page0}}
 
-
-
-
-
-{{page1}}
+{{/page0}} {{page1}}
 <div class="ui card" style="width: 100%">
   <div class="content">
     <!-- <div class="header">Matt Giampietro</div> -->
-    <div class="meta">
-      Possible reason {{=reason_index}}
-    </div>
-    <div class="description">
-      {{=reason.text}}
-    </div>
+    <div class="meta">Possible reason {{=reason_index}}</div>
+    <div class="description">{{=reason.text}}</div>
   </div>
   <div class="ui buttons" id="triage-reason">
-    <button class="ui button green" data-tooltip="This caused my bug!" data-inverted>
+    <button
+      class="ui button green"
+      data-tooltip="This caused my bug!"
+      data-inverted
+    >
       <i class="check icon"></i>
     </button>
-    <button class="ui button red" data-tooltip="This didn't cause my bug." data-inverted>
+    <button
+      class="ui button red"
+      data-tooltip="This didn't cause my bug."
+      data-inverted
+    >
       <i class="close icon"></i>
     </button>
   </div>
 </div>
 
-
 <div class="ui card" style="width: 100%">
-  <div class="content" id="muzu-toolkit">
-  </div>
+  <div class="content" id="muzu-toolkit"></div>
 </div>
 {{/page1}}

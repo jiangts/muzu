@@ -4,33 +4,37 @@
     <!-- Standard Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
 
     <!-- Site Properties -->
     <title>Responsive Elements - Semantic</title>
-    <link rel="stylesheet" type="text/css" href="components/semantic/dist/semantic.css">
-    <link rel="stylesheet" type="text/css" href="css/botui-theme-default.css">
-    <link rel="stylesheet" type="text/css" href="css/botui.min.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="components/semantic/dist/semantic.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/botui-theme-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/botui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
   </head>
   <body>
-
     <div class="ui pointing secondary menu">
-      <a class="item active" data-tab="muzu">Muzu</a>
+      <a class="item active" data-tab="muzu"
+        >Muzu
+        <!-- <img src="images/say_block.gif" class="some-img" /> -->
+      </a>
       <a class="item" data-tab="toolbox">Debugging Toolbox</a>
     </div>
 
     <div class="ui tab active" data-tab="muzu">
-      <div class="botui-app-container" id="muzu-chatbot">
-        <bot-ui></bot-ui>
-      </div>
+      <div class="botui-app-container" id="muzu-chatbot"><bot-ui></bot-ui></div>
     </div>
     <div class="ui tab" data-tab="toolbox">
-      <div class="ui container" id="toolbox-container">
-      </div>
+      <div class="ui container" id="toolbox-container"></div>
     </div>
-
 
     <script src="js/vue.min.js"></script>
     <script src="js/botui.min.js"></script>
@@ -41,7 +45,5 @@
     <script src="js/t.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/index.js"></script>
-
   </body>
 </html>
-
