@@ -81,6 +81,10 @@ let projectTalk_tutorial = `
 <img src="images/say_block_tutorial4.gif" class="some-img" />
 </p>
 `;
+let projectTalk_workspace = `<p>Use this section to write any notes while you debug! </p><textarea rows="4" cols="75" style="outline: none;">
+
+</textarea>`;
+
 let searchOnline_description = `<p>Try searching online to see if you can find the answer! In the search bar, type: "scratch code" and whatever question you have.</p>
 <p><img src="images/search_online_description1.gif" class="some-img" /></p>`;
 
@@ -115,7 +119,7 @@ const toolkit = [
       },
       {
         title: "workspace",
-        markdown: projectTalk_description
+        markdown: projectTalk_workspace
       }
     ]
   },
@@ -205,11 +209,15 @@ const dialogues = [
     dialogue: [
       {
         speaker: "bot",
-        content: `![muzu brain](images/sad_muzu.png) I'm sorry to hear that {{=name}}`
+        content: `I'm sorry to hear that {{=name}}...`
       },
       {
         speaker: "bot",
-        content: `But no worries! When you work hard to get unstuck, your brain is growing! ![muzu brain](images/brain_muzu.png)`
+        content: `But no worries! When you work hard to get unstuck, your brain is growing!`
+      },
+      {
+        speaker: "bot",
+        content: ` ![muzu brain](images/brain_muzu.png)`
       },
       {
         speaker: "bot",
@@ -269,6 +277,29 @@ const dialogues = [
           placeholder: "Describe a solution"
         }
       },
+      {
+        speaker: "bot",
+        content: `Ok! Do you need help figuring out how to implement this solution?`
+      },
+      {
+        speaker: "bot",
+        variable: "NEXT",
+        buttons: [
+          {
+            text: `Yes, please!`,
+            value: "stuck"
+          },
+          {
+            text: `Nope I got it!`,
+            value: "no help solution"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    type: "no help solution",
+    dialogue: [
       {
         speaker: "bot",
         content: "Great work debugging, {{=name}}!",
