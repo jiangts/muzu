@@ -16,7 +16,9 @@
     <div class="content">
       <!-- <div class="header">Matt Giampietro</div> -->
       <div class="meta">Possible reason {{=_val.nu}}</div>
-      <div class="description">{{=_val.text}}</div>
+      <div class="description" data-tooltip="Click to explore this reason">
+        {{=_val.text}}
+      </div>
     </div>
     <!--
       <div class="extra content">
@@ -52,10 +54,10 @@
 <div class="ui cards">
   <div class="card" style="width: 100%">
     <div class="content">
-      <div class="meta">Add a reason:</div>
+      <div class="meta">Can you think of a reason why "{{=bug}}"?:</div>
       <div class="ui action input">
         <input type="text" placeholder="" />
-        <button class="ui button" id="add-reason">Add hypothesis</button>
+        <button class="ui button" id="add-reason">Add</button>
       </div>
     </div>
   </div>

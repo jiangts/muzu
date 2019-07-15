@@ -131,7 +131,7 @@ let searchOnline_tutorial = `<p>
 </p>
 <p><img src="images/search_online_tutorial1.gif" class="some-img" style="padding-top:20px; padding-bottom:20px" /></p>
 <p>
-3) Make sure you don't use terms that are specific to your code (like cat or dinosaur) instead use more general terms (like sprite or character)
+3) Make sure you <b>don't</b> use terms that are specific to your code (like cat or dinosaur) instead use more general terms (like sprite or character)
 </p>
 <p><img src="images/search_online_tutorial2.gif" class="some-img" style="padding-top:20px; padding-bottom:20px" /></p>
 <p>4) Press enter to search!
@@ -274,7 +274,7 @@ const dialogues = [
       },
       {
         speaker: "bot",
-        content: `Because when you work hard to get unstuck, your brain is growing!`
+        content: `Because when you work hard on your code, your brain is growing!`
       },
       {
         speaker: "bot",
