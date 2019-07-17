@@ -129,6 +129,43 @@ $(document).ready(function() {
           render_bug(reasons);
         }
       });
+
+
+      if(reasons.length) {
+        // XXX almost exactly repeating code below
+        var reason_index = reasons.length - 1;
+        $("#muzu-toolkit").html(
+          toolkit_tmpl.render({
+            page1: true,
+            reason_index: reason_index,
+            reason: reasons[reason_index],
+            toolkit: toolkit
+          })
+        );
+
+        $(".muzu-tool").click(function(el) {
+          var tool_index = $(this).attr("data-tool");
+
+          $("#muzu-toolkit").html(
+            toolkit_tmpl.render({
+              page1: true,
+              page2: true,
+              reason_index: reason_index,
+              reason: reasons[reason_index],
+              tool: toolkit[tool_index],
+              no_back: true
+            })
+          );
+          $(".menu .item").tab();
+          $("#muzu-toolkit .menu .item")
+            .first()
+            .click();
+        });
+      }
+      else {
+        $("#muzu-toolkit").parent().hide()
+      }
+
     };
 
     render_reason = function(reason_index) {
@@ -163,7 +200,7 @@ $(document).ready(function() {
                 reason: reasons[reason_index].text
               })
             );
-          }, 2000);
+          }, 700);
         });
 
       $("#muzu-toolkit").html(
@@ -206,7 +243,15 @@ $(document).ready(function() {
         render_bug(reasons);
         setTimeout(function() {
           $('[data-tab="toolbox"]').click();
-        }, 2000);
+        }, 700);
+      }
+      if (data.NEXT === "toolbox2") {
+        bug = data.bug_description;
+        // render_bug(reasons);
+        console.log('TODO: do new toolbox')
+        setTimeout(function() {
+          $('[data-tab="toolbox"]').click();
+        }, 700);
       }
     });
   });

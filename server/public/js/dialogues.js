@@ -312,15 +312,6 @@ const dialogues = [
     ]
   },
   {
-    type: "toobox",
-    dialogue: [
-      {
-        speaker: "bot",
-        NEXT: "toolbox"
-      }
-    ]
-  },
-  {
     type: "solution",
     dialogue: [
       {
@@ -348,7 +339,7 @@ const dialogues = [
         buttons: [
           {
             text: `Yes, please!`,
-            value: "stuck"
+            value: "toolbox2"
           },
           {
             text: `Nope, I got it!`,
@@ -398,6 +389,10 @@ const dialogues = [
   },
   {
     type: "toolbox",
+    dialogue: []
+  },
+  {
+    type: "toolbox2",
     dialogue: []
   },
   {
