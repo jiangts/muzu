@@ -255,7 +255,7 @@ const dialogues = [
         buttons: [
           {
             text: `I got stuck :(`,
-            value: "stuck"
+            value: "growth_mindset_2"
           },
           {
             text: `This is fun!`,
@@ -266,7 +266,7 @@ const dialogues = [
     ]
   },
   {
-    type: "stuck",
+    type: "growth_mindset_1",
     dialogue: [
       {
         speaker: "bot",
@@ -274,12 +274,46 @@ const dialogues = [
       },
       {
         speaker: "bot",
-        content: `Because when you work hard on your code, your brain is growing!`
+        content: `Remember, when you work hard on your code, your brain is growing and making new connections!`
       },
       {
         speaker: "bot",
-        content: ` ![muzu brain](images/brain_muzu.png)`
+        content: ` ![muzu brain](images/brain_muzu.png)`,
+        NEXT: "stuck"
+      }
+    ]
+  },
+  {
+    type: "growth_mindset_2",
+    dialogue: [
+      {
+        speaker: "bot",
+        content: `I'm sorry to hear that {{=name}}...but it's ok to be stuck!`
       },
+      {
+        speaker: "bot",
+        content: `Remember, how you felt stuck on your last bug but solved it? This bug is solvable too!`,
+        NEXT: "stuck"
+      }
+    ]
+  },
+  {
+    type: "growth_mindset_3",
+    dialogue: [
+      {
+        speaker: "bot",
+        content: `I'm sorry to hear that {{=name}}...but it's ok to be stuck!`
+      },
+      {
+        speaker: "bot",
+        content: `Feeling challenged is a great place to be, that's when you can learn the most!`,
+        NEXT: "stuck"
+      }
+    ]
+  },
+  {
+    type: "stuck",
+    dialogue: [
       {
         speaker: "bot",
         content: `Let's try to get unstuck together!`
