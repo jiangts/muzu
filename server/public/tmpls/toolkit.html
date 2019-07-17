@@ -20,8 +20,12 @@
 <div class="ui tab" data-tab="{{=_val.title}}">{{=_val.markdown}}</div>
 {{/@tool.tabs}} {{:page2}}
 <div class="meta" style="padding-bottom: 14px;">
+  {{dtoolkit_text}}
+  {{=toolkit_text}}
+  {{:dtoolkit_text}}
   Toolkit: Use these tools to figure out if "{{=reason.text}}" is what's causing
   your bug
+  {{/dtoolkit_text}}
 </div>
 <div class="ui grid">
   {{@toolkit}}
