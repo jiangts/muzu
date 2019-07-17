@@ -220,6 +220,78 @@ const toolkit = [
   }
 ];
 
+
+const soln_toolkit = [
+  {
+    title: "Project talk",
+    tabs: [
+      {
+        title: "description",
+        markdown: projectTalk_description
+      },
+      {
+        title: "tutorial",
+        markdown: projectTalk_tutorial
+      },
+      {
+        title: "workspace",
+        markdown: workspace
+      }
+    ]
+  },
+  {
+    title: "A block at a time",
+    tabs: [
+      {
+        title: "description",
+        markdown: oneBlock_description
+      },
+      {
+        title: "tutorial",
+        markdown: oneBlock_tutorial
+      },
+      {
+        title: "workspace",
+        markdown: workspace
+      }
+    ]
+  },
+  {
+    title: "Search Online",
+    tabs: [
+      {
+        title: "description",
+        markdown: searchOnline_description
+      },
+      {
+        title: "tutorial",
+        markdown: searchOnline_tutorial
+      },
+      {
+        title: "workspace",
+        markdown: workspace
+      }
+    ]
+  },
+  {
+    title: "Take a break",
+    tabs: [
+      {
+        title: "description",
+        markdown: break_description
+      },
+      {
+        title: "tutorial",
+        markdown: break_tutorial
+      },
+      {
+        title: "workspace",
+        markdown: workspace
+      }
+    ]
+  }
+];
+
 const dialogues = [
   {
     type: "intro",
@@ -346,15 +418,6 @@ const dialogues = [
     ]
   },
   {
-    type: "toobox",
-    dialogue: [
-      {
-        speaker: "bot",
-        NEXT: "toolbox"
-      }
-    ]
-  },
-  {
     type: "solution",
     dialogue: [
       {
@@ -382,13 +445,51 @@ const dialogues = [
         buttons: [
           {
             text: `Yes, please!`,
-            value: "stuck"
+            value: "toolbox2"
           },
           {
             text: `Nope, I got it!`,
             value: "no help solution"
           }
         ]
+      }
+    ]
+  },
+  {
+    type: "help solution",
+    dialogue: [
+      {
+        speaker: "bot",
+        content: `![muzu brain](images/cheerful_muzu.png)`
+      },
+      {
+        speaker: "bot",
+        content:
+        "Great work debugging, {{=name}}! I know you worked really hard!"
+      },
+      {
+        speaker: "bot",
+        content: "Did you learn anything from working through that bug?",
+        NEXT: "main_loop"
+      },
+      {
+        speaker: "human",
+        input: {
+          variable: "reflection",
+          placeholder: "I learned..."
+        }
+      },
+      {
+        speaker: "bot",
+        content:
+        "Good to hear, {{=name}}! You can recall how you worked through this bug the next time you encounter another bug",
+        NEXT: "main_loop"
+      },
+      {
+        speaker: "bot",
+        content:
+        "If you need any help again, you can always call on lil' o me!",
+        NEXT: "main_loop"
       }
     ]
   },
@@ -432,6 +533,10 @@ const dialogues = [
   },
   {
     type: "toolbox",
+    dialogue: []
+  },
+  {
+    type: "toolbox2",
     dialogue: []
   },
   {

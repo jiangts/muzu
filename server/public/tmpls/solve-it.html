@@ -4,19 +4,27 @@
     <h3><i class="bug icon"></i> Current Bug</h3>
     <p>{{=bug}}</p>
   </div>
+
+  <div class="content">
+    <!-- <div class="header">Matt Giampietro</div> -->
+    <div class="meta">Reason:</div>
+    <div class="description">
+      {{=reason}}
+    </div>
+  </div>
 </div>
 
 <div class="ui link cards">
-  {{@reasons}}
+  {{@solutions}}
   <div
-    class="{{=_val.color}} card muzu-reason"
+    class="{{=_val.color}} card muzu-soln"
     data-reason="{{=_key}}"
     style="width: 100%"
   >
     <div class="content">
       <!-- <div class="header">Matt Giampietro</div> -->
-      <div class="meta">Possible reason {{=_val.nu}}</div>
-      <div class="description" data-tooltip="Click to explore this reason">
+      <div class="meta">Possible solution:</div>
+      <div class="description" data-tooltip="Click to explore this solution">
         {{=_val.text}}
       </div>
     </div>
@@ -32,7 +40,7 @@
       </div>
     -->
   </div>
-  {{/@reasons}}
+  {{/@solutions}}
 </div>
 
 <div class="ui grid">
@@ -54,10 +62,10 @@
 <div class="ui cards">
   <div class="card" style="width: 100%">
     <div class="content">
-      <div class="meta">Can you think of a reason why "{{=bug}}"?:</div>
+      <div class="meta">Add a solution</div>
       <div class="ui action input">
         <input type="text" placeholder="" />
-        <button class="ui button" id="add-reason">Add</button>
+        <button class="ui button" id="add-soln">Add</button>
       </div>
     </div>
   </div>
@@ -71,30 +79,20 @@
 <div class="ui card" style="width: 100%">
   <div class="content">
     <!-- <div class="header">Matt Giampietro</div> -->
-    <div class="meta">Possible reason {{=reason_index}}</div>
+    <div class="meta">Possible solution {{=reason_index}}</div>
     <div class="description">{{=reason.text}}</div>
   </div>
   <div class="ui buttons" id="triage-reason">
     <button
       class="ui button green"
-      data-tooltip=
-      {{solution}}
-      "This is the solution!"
-      {{:solution}}
-      "This caused my bug!"
-      {{/solution}}
+      data-tooltip="This solution worked!"
       data-inverted
     >
       <i class="check icon"></i>
     </button>
     <button
       class="ui button red"
-      data-tooltip=
-      {{solution}}
-      "This isn't the solution!"
-      {{:solution}}
-      "This didn't cause my bug."
-      {{/solution}}
+      data-tooltip="This solution didn't work"
       data-inverted
     >
       <i class="close icon"></i>

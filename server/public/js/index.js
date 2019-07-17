@@ -82,15 +82,21 @@ $(document).ready(function() {
 
   Promise.all([
     get_tmpl("tmpls/toolbox.html"),
-    get_tmpl("tmpls/toolkit.html")
+    get_tmpl("tmpls/toolkit.html"),
+    get_tmpl("tmpls/solve-it.html")
   ]).then(tmpls => {
-    var [toolbox_tmpl, toolkit_tmpl] = tmpls;
+    var [toolbox_tmpl, toolkit_tmpl, solveit_tmpl] = tmpls;
 
     var bug = "";
     var reasons = [];
+    var solns = [];
+
+    var reason;
 
     var render_bug;
     var render_reason;
+    var render_soln;
+    var render_soln_detail;
 
     render_bug = function(reasons) {
       $("#toolbox-container").html(
@@ -129,6 +135,49 @@ $(document).ready(function() {
           render_bug(reasons);
         }
       });
+
+
+      var rerender;
+      rerender = function() {
+        if(reasons.length) {
+          // XXX almost exactly repeating code below
+          var reason_index = reasons.length - 1;
+          $("#muzu-toolkit").html(
+            toolkit_tmpl.render({
+              page1: true,
+              reason_index: reason_index,
+              reason: reasons[reason_index],
+              toolkit: toolkit
+            })
+          );
+
+          $(".muzu-tool").click(function(el) {
+            var tool_index = $(this).attr("data-tool");
+
+            $("#muzu-toolkit").html(
+              toolkit_tmpl.render({
+                page1: true,
+                page2: true,
+                reason_index: reason_index,
+                reason: reasons[reason_index],
+                tool: toolkit[tool_index],
+              })
+            );
+            $(".menu .item").tab();
+            $("#muzu-toolkit .menu .item")
+              .first()
+              .click();
+            $("#muzu-toolkit .back").click(function() {
+              rerender()
+            });
+          });
+        }
+        else {
+          $("#muzu-toolkit").parent().hide()
+        }
+
+      }
+      rerender()
     };
 
     render_reason = function(reason_index) {
@@ -155,6 +204,7 @@ $(document).ready(function() {
           render_bug(reasons);
           setTimeout(function() {
             $('[data-tab="muzu"]').click();
+            reason = reasons[reason_index].text
             run_dialogue(
               botui,
               dialogues,
@@ -163,7 +213,7 @@ $(document).ready(function() {
                 reason: reasons[reason_index].text
               })
             );
-          }, 2000);
+          }, 700);
         });
 
       $("#muzu-toolkit").html(
@@ -206,10 +256,190 @@ $(document).ready(function() {
         render_bug(reasons);
         setTimeout(function() {
           $('[data-tab="toolbox"]').click();
-        }, 2000);
+        }, 700);
+      }
+      if (data.NEXT === "toolbox2") {
+        bug = data.bug_description;
+        solns.push({
+          text: data.soln_description
+        });
+        render_soln(solns);
+        setTimeout(function() {
+          $('[data-tab="toolbox"]').click();
+        }, 700);
       }
     });
+
+
+
+
+    render_soln = function(solns) {
+      $("#toolbox-container").html(
+        solveit_tmpl.render({
+          page0: true,
+          bug: bug,
+          reason: reason,
+          solutions: solns.map((r, i) => {
+            r.nu = i + 1;
+            if (r.culprit === true) {
+              r.color = "green";
+            } else if (r.culprit === false) {
+              r.color = "red";
+            } else {
+              r.color = "grey";
+            }
+            return r;
+          })
+        })
+      );
+
+      $(".muzu-soln").click(function(el) {
+        var soln_index = $(this).attr("data-reason");
+
+        render_soln_detail(soln_index);
+      });
+
+      $("#add-soln").click(function(el) {
+        var new_soln = $(this)
+          .prev()
+          .val()
+          .trim();
+        if (new_soln.length) {
+          console.log('before', solns)
+          solns.push({
+            text: new_soln
+          });
+          console.log(solns)
+          render_soln(solns);
+        }
+      });
+
+
+      var rerender;
+      rerender = function() {
+        // XXX almost exactly repeating code...
+        var soln_index = solns.length - 1;
+        $("#muzu-toolkit").html(
+          toolkit_tmpl.render({
+            page1: true,
+            reason_index: soln_index,
+            reason: solns.length ? solns[soln_index] : { text: "" },
+            toolkit: toolkit
+          })
+        );
+
+        $(".muzu-tool").click(function(el) {
+          var tool_index = $(this).attr("data-tool");
+
+          $("#muzu-toolkit").html(
+            toolkit_tmpl.render({
+              page1: true,
+              page2: true,
+              tool: soln_toolkit[tool_index],
+              dtoolkit_text: true,
+              toolkit_text: 'Use these tools to look for solutions!'
+            })
+          );
+          $(".menu .item").tab();
+          $("#muzu-toolkit .menu .item")
+            .first()
+            .click();
+          $("#muzu-toolkit .back").click(function() {
+            rerender()
+          });
+        });
+      }
+      rerender()
+
+    };
+
+
+
+
+
+
+    render_soln_detail = function(soln_index) {
+      $("#toolbox-container").html(
+        toolbox_tmpl.render({
+          page1: true,
+          solution: true,
+          reason_index: soln_index,
+          reason: solns[soln_index],
+          toolkit: toolkit
+        })
+      );
+
+      $("#triage-reason .close")
+        .parent()
+        .click(function() {
+          solns[soln_index].culprit = false;
+          render_soln(solns);
+        });
+
+      $("#triage-reason .check")
+        .parent()
+        .click(function() {
+          solns[soln_index].culprit = true;
+          render_soln(solns);
+          setTimeout(function() {
+            $('[data-tab="muzu"]').click();
+            reason = solns[soln_index].text
+            run_dialogue(
+              botui,
+              dialogues,
+              "help solution",
+              Object.assign(chat_context, {
+                soln: solns[soln_index].text
+              })
+            );
+          }, 700);
+        });
+
+      $("#muzu-toolkit").html(
+        toolkit_tmpl.render({
+          page1: true,
+          solution: true,
+          reason_index: soln_index,
+          reason: solns[soln_index],
+          toolkit: toolkit,
+          dtoolkit_text: true,
+          toolkit_text: 'Use these tools to check your proposed solutions!'
+        })
+      );
+
+      $(".muzu-tool").click(function(el) {
+        var tool_index = $(this).attr("data-tool");
+
+        $("#muzu-toolkit").html(
+          toolkit_tmpl.render({
+            page1: true,
+            page2: true,
+            reason_index: soln_index,
+            reason: solns[soln_index],
+            tool: toolkit[tool_index],
+            dtoolkit_text: true,
+            toolkit_text: 'Use these tools to check your proposed solutions!'
+          })
+        );
+        $(".menu .item").tab();
+        $("#muzu-toolkit .menu .item")
+          .first()
+          .click();
+        $("#muzu-toolkit .back").click(function() {
+          render_soln_detail(soln_index);
+        });
+      });
+    }
+
+
+
+
   });
+
+
+
+
+
 
   run_dialogue(botui, dialogues, "intro", chat_context);
 });
