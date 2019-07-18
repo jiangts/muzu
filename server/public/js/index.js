@@ -136,10 +136,9 @@ $(document).ready(function() {
         }
       });
 
-
       var rerender;
       rerender = function() {
-        if(reasons.length) {
+        if (reasons.length) {
           // XXX almost exactly repeating code below
           var reason_index = reasons.length - 1;
           $("#muzu-toolkit").html(
@@ -160,7 +159,7 @@ $(document).ready(function() {
                 page2: true,
                 reason_index: reason_index,
                 reason: reasons[reason_index],
-                tool: toolkit[tool_index],
+                tool: toolkit[tool_index]
               })
             );
             $(".menu .item").tab();
@@ -168,16 +167,16 @@ $(document).ready(function() {
               .first()
               .click();
             $("#muzu-toolkit .back").click(function() {
-              rerender()
+              rerender();
             });
           });
+        } else {
+          $("#muzu-toolkit")
+            .parent()
+            .hide();
         }
-        else {
-          $("#muzu-toolkit").parent().hide()
-        }
-
-      }
-      rerender()
+      };
+      rerender();
     };
 
     render_reason = function(reason_index) {
@@ -204,7 +203,7 @@ $(document).ready(function() {
           render_bug(reasons);
           setTimeout(function() {
             $('[data-tab="muzu"]').click();
-            reason = reasons[reason_index].text
+            reason = reasons[reason_index].text;
             run_dialogue(
               botui,
               dialogues,
@@ -270,9 +269,6 @@ $(document).ready(function() {
       }
     });
 
-
-
-
     render_soln = function(solns) {
       $("#toolbox-container").html(
         solveit_tmpl.render({
@@ -282,7 +278,7 @@ $(document).ready(function() {
           solutions: solns.map((r, i) => {
             r.nu = i + 1;
             if (r.culprit === true) {
-              r.color = "green";
+              r.color = "#D6F3B8";
             } else if (r.culprit === false) {
               r.color = "red";
             } else {
@@ -305,15 +301,14 @@ $(document).ready(function() {
           .val()
           .trim();
         if (new_soln.length) {
-          console.log('before', solns)
+          console.log("before", solns);
           solns.push({
             text: new_soln
           });
-          console.log(solns)
+          console.log(solns);
           render_soln(solns);
         }
       });
-
 
       var rerender;
       rerender = function() {
@@ -337,7 +332,7 @@ $(document).ready(function() {
               page2: true,
               tool: soln_toolkit[tool_index],
               dtoolkit_text: true,
-              toolkit_text: 'Use these tools to look for solutions!'
+              toolkit_text: "Use these tools to look for solutions!"
             })
           );
           $(".menu .item").tab();
@@ -345,18 +340,12 @@ $(document).ready(function() {
             .first()
             .click();
           $("#muzu-toolkit .back").click(function() {
-            rerender()
+            rerender();
           });
         });
-      }
-      rerender()
-
+      };
+      rerender();
     };
-
-
-
-
-
 
     render_soln_detail = function(soln_index) {
       $("#toolbox-container").html(
@@ -365,7 +354,10 @@ $(document).ready(function() {
           solution: true,
           reason_index: soln_index,
           reason: solns[soln_index],
-          toolkit: toolkit
+          toolkit: toolkit,
+          //dtoolkit_text: true,
+          toolkit_text:
+            "Not sure what a solution might be? Use these tools to help!"
         })
       );
 
@@ -383,7 +375,7 @@ $(document).ready(function() {
           render_soln(solns);
           setTimeout(function() {
             $('[data-tab="muzu"]').click();
-            reason = solns[soln_index].text
+            reason = solns[soln_index].text;
             run_dialogue(
               botui,
               dialogues,
@@ -403,7 +395,7 @@ $(document).ready(function() {
           reason: solns[soln_index],
           toolkit: toolkit,
           dtoolkit_text: true,
-          toolkit_text: 'Use these tools to check your proposed solutions!'
+          toolkit_text: "Use these tools to check your proposed solutions!"
         })
       );
 
@@ -418,7 +410,7 @@ $(document).ready(function() {
             reason: solns[soln_index],
             tool: toolkit[tool_index],
             dtoolkit_text: true,
-            toolkit_text: 'Use these tools to check your proposed solutions!'
+            toolkit_text: "Use these tools to check your proposed solutions!"
           })
         );
         $(".menu .item").tab();
@@ -429,17 +421,8 @@ $(document).ready(function() {
           render_soln_detail(soln_index);
         });
       });
-    }
-
-
-
-
+    };
   });
-
-
-
-
-
 
   run_dialogue(botui, dialogues, "intro", chat_context);
 });

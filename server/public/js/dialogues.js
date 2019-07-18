@@ -220,7 +220,6 @@ const toolkit = [
   }
 ];
 
-
 const soln_toolkit = [
   {
     title: "Project talk",
@@ -340,13 +339,13 @@ const dialogues = [
   {
     type: "growth_mindset_1",
     dialogue: [
+      // {
+      //   speaker: "bot",
+      //   content: `I'm sorry to hear that {{=name}}...but it's ok to be stuck!`
+      // },
       {
         speaker: "bot",
-        content: `I'm sorry to hear that {{=name}}...but it's ok to be stuck!`
-      },
-      {
-        speaker: "bot",
-        content: `Remember, when you work hard on your code, your brain is growing and making new connections!`
+        content: `Not a problem! Remember, when you work hard on your code, your brain is growing and making new connections!`
       },
       {
         speaker: "bot",
@@ -465,7 +464,7 @@ const dialogues = [
       {
         speaker: "bot",
         content:
-        "Great work debugging, {{=name}}! I know you worked really hard!"
+          "Great work debugging, {{=name}}! I know you worked really hard!"
       },
       {
         speaker: "bot",
@@ -482,13 +481,13 @@ const dialogues = [
       {
         speaker: "bot",
         content:
-        "Good to hear, {{=name}}! You can recall how you worked through this bug the next time you encounter another bug",
+          "Good to hear, {{=name}}! You can recall how you worked through this bug the next time you encounter another bug",
         NEXT: "main_loop"
       },
       {
         speaker: "bot",
         content:
-        "If you need any help again, you can always call on lil' o me!",
+          "If you need any help again, you can always call on lil' o me!",
         NEXT: "main_loop"
       }
     ]

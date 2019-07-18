@@ -7,5 +7,25 @@
 }
 
 .muzu-tool {
-  /* background: green !important; */
+  background-color: #c9f0e2 !important;
+}
+
+/* .content {
+  background: #d6f3b8;
+} */
+
+.bug {
+  color: #f89256;
+}
+
+.pointing {
+  background: #f8d7e2;
+}
+
+.green {
+  background: #b7ec82 !important;
+}
+
+.red {
+  background: #fe9e9e !important;
 }
