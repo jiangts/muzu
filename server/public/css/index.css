@@ -29,3 +29,7 @@
 .red {
   background: #fe9e9e !important;
 }
+
+body {
+  min-height: 100vh;
+}
