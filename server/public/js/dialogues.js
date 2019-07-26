@@ -168,7 +168,7 @@ const toolkit = [
     ]
   },
   {
-    title: "Project talk",
+    title: "Say blocks",
     tabs: [
       {
         title: "description",
@@ -222,7 +222,7 @@ const toolkit = [
 
 const soln_toolkit = [
   {
-    title: "Project talk",
+    title: "Say Blocks",
     tabs: [
       {
         title: "description",
@@ -292,6 +292,37 @@ const soln_toolkit = [
 ];
 
 const dialogues = [
+  // {
+  //   type: "intro",
+  //   dialogue: [
+  //     {
+  //       speaker: "human",
+  //       input: {
+  //         variable: "name",
+  //         placeholder: ""
+  //       }
+  //     },
+  //     {
+  //       speaker: "bot",
+  //       content: `I'm sorry to hear that Clara...but it's ok to be stuck!`
+  //     },
+  //     {
+  //       speaker: "bot",
+  //       content: `When you feel challenged, that's when you can learn the most!`
+  //     },
+  //     {
+  //       speaker: "bot",
+  //       content: `![muzu gif](images/brain_muzu.png)`
+  //     },
+  //     {
+  //       speaker: "human",
+  //       input: {
+  //         variable: "name",
+  //         placeholder: ""
+  //       }
+  //     }
+  //   ]
+  // },
   {
     type: "intro",
     dialogue: [

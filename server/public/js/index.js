@@ -62,7 +62,10 @@ $(document).ready(function() {
 
   var widget_id = "muzu-chatbot";
 
+  //console.log("initializing botui");
   var botui = new BotUI(widget_id);
+
+  console.log(botui);
 
   // load_tmpl('#toolbox-container', 'tmpls/toolbox.html', {
   //   bug: `My character isn't moving when I press the arrow key`
@@ -204,6 +207,7 @@ $(document).ready(function() {
           setTimeout(function() {
             $('[data-tab="muzu"]').click();
             reason = reasons[reason_index].text;
+            console.log("in triange-reason ", botui);
             run_dialogue(
               botui,
               dialogues,
@@ -423,6 +427,7 @@ $(document).ready(function() {
       });
     };
   });
+  console.log("first ", botui);
 
   run_dialogue(botui, dialogues, "intro", chat_context);
 });
