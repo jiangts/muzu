@@ -43,5 +43,7 @@
   "permissions": [
     "tabs"
   ],
-  "short_name": "Muzu"
+  "short_name": "Muzu",
+  "content_security_policy": "script-src 'self' https://use.fontawesome.com https://unpkg.com; object-src 'self'"
+
 }
